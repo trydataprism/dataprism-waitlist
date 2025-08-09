@@ -5,16 +5,16 @@ import { type ErrorResponse } from "@/lib/types/api.types";
 
 export async function GET() {
   const waitlistService = new WaitlistService();
-  
+
   try {
-    const count = await waitlistService.getWaitlistCount();
-    
-    return NextResponse.json({ count }, { status: 200 });
+    const stats = await waitlistService.getWaitlistStats();
+
+    return NextResponse.json(stats, { status: 200 });
   } catch (error: unknown) {
-    console.error("GET /api/waitlist/count error:", createErrorLog(error));
-    
+    console.error("GET /api/waitlist/stats error:", createErrorLog(error));
+
     return NextResponse.json(
-      { error: "Failed to get waitlist count" } as ErrorResponse,
+      { error: "Failed to get waitlist statistics" } as ErrorResponse,
       { status: 500 }
     );
   }

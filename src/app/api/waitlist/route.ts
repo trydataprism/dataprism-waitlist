@@ -1,111 +1,98 @@
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
-import { db } from "@/lib/db";
-import { waitlistEntries } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
-
-const emailSchema = z.object({
-  email: z.string().email(),
-});
-
-const ipRequestCounts = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
-const MAX_REQUESTS_PER_WINDOW = 2;
-
-function getRealIP(req: NextRequest): string {
-  const forwarded = req.headers.get("x-forwarded-for");
-  const real = req.headers.get("x-real-ip");
-  
-  if (forwarded) {
-    return forwarded.split(",")[0].trim();
-  }
-  
-  if (real) {
-    return real.trim();
-  }
-  
-  return "127.0.0.1";
-}
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const record = ipRequestCounts.get(ip);
-  
-  if (!record || now > record.resetTime) {
-    ipRequestCounts.set(ip, {
-      count: 1,
-      resetTime: now + RATE_LIMIT_WINDOW_MS,
-    });
-    return false;
-  }
-  
-  if (record.count >= MAX_REQUESTS_PER_WINDOW) {
-    return true;
-  }
-  
-  record.count++;
-  return false;
-}
+import { WaitlistService } from "@/lib/services/waitlist.service";
+import { rateLimiter } from "@/lib/middleware/rate-limiter";
+import { getRealIP, createErrorLog } from "@/lib/utils/request-utils";
+import {
+  APIError,
+  ValidationError,
+  ConflictError,
+  RateLimitError,
+  type WaitlistResponse,
+  type ErrorResponse,
+} from "@/lib/types/api.types";
 
 export async function POST(req: NextRequest) {
+  const waitlistService = new WaitlistService();
+  
   try {
     const ip = getRealIP(req);
     
-    if (isRateLimited(ip)) {
-      return NextResponse.json(
-        { error: "Too many requests. Please try again later." },
-        { status: 429 }
-      );
-    }
+    // Check rate limit
+    await rateLimiter.enforceRateLimit(ip);
 
+    // Get request body
     const body = await req.json();
-    const validatedData = emailSchema.parse(body);
     
-    const existingEntry = await db
-      .select()
-      .from(waitlistEntries)
-      .where(eq(waitlistEntries.email, validatedData.email))
-      .limit(1);
-    
-    if (existingEntry.length > 0) {
+    if (!body.email) {
       return NextResponse.json(
-        { error: "Email already registered" },
-        { status: 409 }
-      );
-    }
-    
-    await db.insert(waitlistEntries).values({
-      email: validatedData.email,
-    });
-    
-    const totalCount = await db.select().from(waitlistEntries);
-    
-    return NextResponse.json({
-      success: true,
-      count: totalCount.length,
-    });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: error.issues[0].message },
+        { error: "Email is required" } as ErrorResponse,
         { status: 400 }
       );
     }
     
+    // Add to waitlist using service layer
+    const result = await waitlistService.addToWaitlist(body.email);
+    
+    const response: WaitlistResponse = {
+      success: true,
+      count: result.totalCount,
+    };
+    
+    return NextResponse.json(response, { status: 201 });
+  } catch (error: unknown) {
+    console.error("POST /api/waitlist error:", createErrorLog(error, {
+      ip: getRealIP(req),
+      userAgent: req.headers.get("user-agent"),
+    }));
+    
+    if (error instanceof RateLimitError) {
+      return NextResponse.json(
+        { error: error.message } as ErrorResponse,
+        { status: error.statusCode }
+      );
+    }
+    
+    if (error instanceof ValidationError) {
+      return NextResponse.json(
+        { error: error.message } as ErrorResponse,
+        { status: error.statusCode }
+      );
+    }
+    
+    if (error instanceof ConflictError) {
+      return NextResponse.json(
+        { error: error.message } as ErrorResponse,
+        { status: error.statusCode }
+      );
+    }
+    
+    if (error instanceof APIError) {
+      return NextResponse.json(
+        { error: error.message } as ErrorResponse,
+        { status: error.statusCode }
+      );
+    }
+    
+    // Generic server error
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Internal server error" } as ErrorResponse,
       { status: 500 }
     );
   }
 }
 
 export async function GET() {
+  const waitlistService = new WaitlistService();
+  
   try {
-    const totalCount = await db.select().from(waitlistEntries);
-    return NextResponse.json({ count: totalCount.length });
-  } catch (error) {
+    const count = await waitlistService.getWaitlistCount();
+    
+    return NextResponse.json({ count }, { status: 200 });
+  } catch (error: unknown) {
+    console.error("GET /api/waitlist error:", createErrorLog(error));
+    
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Failed to get waitlist count" } as ErrorResponse,
       { status: 500 }
     );
   }
