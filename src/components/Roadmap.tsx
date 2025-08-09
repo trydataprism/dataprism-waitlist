@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 export default function Roadmap() {
   const roadmapItems = [
     {
@@ -49,17 +51,49 @@ export default function Roadmap() {
     return "text-gray-500";
   };
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+    },
+  };
+
+  const itemVariant = {
+    hidden: { opacity: 0, y: 10 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+  };
+
   return (
-    <div className="mb-12">
-      <h3 className="text-lg font-bold mb-6">Roadmap</h3>
+    <motion.div
+      className="mb-12"
+      variants={container}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <motion.h3
+        className="text-lg font-bold mb-6 text-[#1E1E1E]"
+        variants={itemVariant}
+      >
+        Roadmap
+      </motion.h3>
       <div className="space-y-4 text-sm">
         {roadmapItems.map((item, index) => (
-          <div key={index} className="flex items-start gap-3">
-            <div
+          <motion.div
+            key={index}
+            className="flex items-start gap-3"
+            variants={itemVariant}
+          >
+            <motion.div
               className={`${getStatusStyle(item.status)} flex-shrink-0 mt-1.5`}
-            ></div>
+              initial={{ scale: 0.8, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              viewport={{ once: true }}
+            />
             <div>
-              <span className="font-bold">{item.title}</span>
+              <span className="font-bold text-[#1E1E1E]">{item.title}</span>
               <br />
               <span className="text-gray-600 ml-0">{item.description}</span>
               <br />
@@ -71,9 +105,9 @@ export default function Roadmap() {
                 {item.status.replace("_", " ")}
               </span>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
