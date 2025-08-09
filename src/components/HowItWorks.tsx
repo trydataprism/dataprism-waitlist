@@ -49,7 +49,7 @@ export default function HowItWorks() {
           <span className="font-bold text-foreground">3. Get insights.</span>
           <br />
           <span className="text-muted-foreground ml-4">
-            See who's browsing, what needs attention, and review performance.
+            See who&apos;s browsing, what needs attention, and review performance.
           </span>
         </motion.div>
       </div>

@@ -79,7 +79,7 @@ export default function Hero({
         <motion.div className="text-sm mb-4" variants={item}>
           <p className="font-bold">We built dataprism using dataprism.</p>
           <p className="text-muted-foreground">
-            We think you'll like it as much as we do.
+            We think you&apos;ll like it as much as we do.
           </p>
         </motion.div>
 
@@ -167,7 +167,7 @@ export default function Hero({
                 transition={{ type: "spring", stiffness: 300, damping: 22 }}
               >
                 <Check className="size-4" />
-                <span>you’re on the waitlist</span>
+                <span>you&apos;re on the waitlist</span>
                 <motion.span
                   className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary"
                   initial={{ scale: 0.6, opacity: 0.25 }}

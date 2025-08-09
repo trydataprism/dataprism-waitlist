@@ -62,7 +62,7 @@ export default function Home() {
       } else {
         setError(data.error || "Something went wrong");
       }
-    } catch (error) {
+    } catch (error: string | unknown) {
       setError("Network error. Please try again.");
     } finally {
       setIsLoading(false);
