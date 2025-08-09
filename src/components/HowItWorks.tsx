@@ -25,30 +25,30 @@ export default function HowItWorks() {
       viewport={{ once: true, amount: 0.3 }}
     >
       <motion.h3
-        className="text-lg font-bold mb-6 text-[#1E1E1E]"
+        className="text-lg font-bold mb-6 text-foreground"
         variants={item}
       >
         How_it_works
       </motion.h3>
       <div className="space-y-4 text-sm">
         <motion.div variants={item}>
-          <span className="font-bold text-[#1E1E1E]">1. Add your site.</span>
+          <span className="font-bold text-foreground">1. Add your site.</span>
           <br />
-          <span className="text-gray-600 ml-4">
+          <span className="text-muted-foreground ml-4">
             dataprism tracks it and sends analytics to your dashboard.
           </span>
         </motion.div>
         <motion.div variants={item}>
-          <span className="font-bold text-[#1E1E1E]">2. Monitor visitors.</span>
+          <span className="font-bold text-foreground">2. Monitor visitors.</span>
           <br />
-          <span className="text-gray-600 ml-4">
+          <span className="text-muted-foreground ml-4">
             Each visitor gets you real-time data in an isolated workspace.
           </span>
         </motion.div>
         <motion.div variants={item}>
-          <span className="font-bold text-[#1E1E1E]">3. Get insights.</span>
+          <span className="font-bold text-foreground">3. Get insights.</span>
           <br />
-          <span className="text-gray-600 ml-4">
+          <span className="text-muted-foreground ml-4">
             See who's browsing, what needs attention, and review performance.
           </span>
         </motion.div>

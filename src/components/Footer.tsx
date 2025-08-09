@@ -1,11 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+
+const ThemeToggle = dynamic(() => import("./ThemeToggle"), { 
+  ssr: false,
+  loading: () => <div className="w-9 h-9" />
+});
 
 export default function Footer() {
   return (
     <motion.div
-      className="pt-8 pb-6 border-t border-gray-200"
+      className="pt-8 pb-6 border-t border-border"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -13,13 +19,13 @@ export default function Footer() {
     >
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <p className="text-gray-500 text-sm">© 2025 dataprism</p>
+          <p className="text-muted-foreground text-sm">© 2025 dataprism</p>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center justify-between w-full sm:w-auto gap-6">
             <div className="flex items-center gap-3">
               <a
                 href="https://github.com/trydataprism/dataprism-waitlist"
-                className="text-gray-600 hover:text-[#1E1E1E] transition-colors p-1"
+                className="text-muted-foreground hover:text-foreground transition-colors p-1"
                 aria-label="GitHub"
               >
                 <svg
@@ -32,7 +38,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-gray-600 hover:text-[#1E1E1E] transition-colors p-1"
+                className="text-muted-foreground hover:text-foreground transition-colors p-1"
                 aria-label="Twitter"
               >
                 <svg
@@ -44,6 +50,7 @@ export default function Footer() {
                 </svg>
               </a>
             </div>
+            <ThemeToggle />
           </div>
         </div>
       </div>

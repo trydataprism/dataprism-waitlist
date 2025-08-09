@@ -73,7 +73,7 @@ export default function Roadmap() {
       viewport={{ once: true, amount: 0.2 }}
     >
       <motion.h3
-        className="text-lg font-bold mb-6 text-[#1E1E1E]"
+        className="text-lg font-bold mb-6 text-foreground"
         variants={itemVariant}
       >
         Roadmap
@@ -93,9 +93,9 @@ export default function Roadmap() {
               viewport={{ once: true }}
             />
             <div>
-              <span className="font-bold text-[#1E1E1E]">{item.title}</span>
+              <span className="font-bold text-foreground">{item.title}</span>
               <br />
-              <span className="text-gray-600 ml-0">{item.description}</span>
+              <span className="text-muted-foreground ml-0">{item.description}</span>
               <br />
               <span
                 className={`text-xs capitalize ${getStatusTextColor(
