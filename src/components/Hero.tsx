@@ -8,6 +8,7 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useState, useEffect } from "react";
+import CountUp from "react-countup";
 
 interface HeroProps {
   email: string;
@@ -15,6 +16,10 @@ interface HeroProps {
   isSubmitted: boolean;
   joinedCount: number;
   handleSubmit: (e: React.FormEvent) => void;
+  isLoading: boolean;
+  error: string;
+  setError: (error: string) => void;
+  initialLoad: boolean;
 }
 
 export default function Hero({
@@ -23,6 +28,10 @@ export default function Hero({
   isSubmitted,
   joinedCount,
   handleSubmit,
+  isLoading,
+  error,
+  setError,
+  initialLoad,
 }: HeroProps) {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
@@ -30,7 +39,7 @@ export default function Hero({
   useEffect(() => {
     setMounted(true);
   }, []);
-  
+
   const container = {
     hidden: { opacity: 0, y: 12 },
     show: {
@@ -57,11 +66,11 @@ export default function Hero({
   return (
     <motion.div variants={container} initial="hidden" animate="show">
       <motion.div className="flex items-center gap-2" variants={item}>
-        <Image 
-          src={mounted && theme === 'dark' ? "/dark_logo.svg" : "/logo.svg"} 
-          alt="dataprism logo" 
-          width={25} 
-          height={25} 
+        <Image
+          src={mounted && theme === "dark" ? "/dark_logo.svg" : "/logo.svg"}
+          alt="dataprism logo"
+          width={25}
+          height={25}
         />
         <h1 className="text-3xl font-bold text-foreground">dataprism</h1>
       </motion.div>
@@ -90,13 +99,15 @@ export default function Hero({
                   type="email"
                   placeholder="your@email.com"
                   value={email}
-                  onChange={(e: unknown) =>
+                  onChange={(e: unknown) => {
                     setEmail(
                       (e as React.ChangeEvent<HTMLInputElement>).target.value
-                    )
-                  }
+                    );
+                    if (error) setError("");
+                  }}
                   className="rounded-none flex-1 text-sm"
                   required
+                  disabled={isLoading}
                 />
                 <motion.div
                   layoutId="waitlist-cta"
@@ -106,13 +117,37 @@ export default function Hero({
                   <Button
                     type="submit"
                     className="rounded-none bg-primary hover:bg-primary/90 text-primary-foreground px-6 text-sm cursor-pointer"
+                    disabled={isLoading}
                   >
-                    Join Waitlist <ArrowUpRight className="size-4" />
+                    {isLoading ? "Joining..." : "Join Waitlist"}{" "}
+                    <ArrowUpRight className="size-4" />
                   </Button>
                 </motion.div>
               </motion.div>
-              <motion.p className="text-muted-foreground text-sm mt-3" variants={item}>
-                {joinedCount.toLocaleString()} people waiting
+              {error && (
+                <motion.p
+                  className="text-red-500 text-sm mt-2"
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  variants={item}
+                >
+                  {error}
+                </motion.p>
+              )}
+              <motion.p
+                className="text-muted-foreground text-sm mt-3"
+                variants={item}
+              >
+                <CountUp
+                  key={`form-${joinedCount}-${initialLoad}`}
+                  start={initialLoad ? 0 : joinedCount}
+                  end={joinedCount}
+                  duration={initialLoad ? 1.8 : 0}
+                  delay={initialLoad ? 0.5 : 0}
+                  separator=","
+                  useEasing={true}
+                />{" "}
+                people waiting
               </motion.p>
             </motion.form>
           ) : (
@@ -147,7 +182,15 @@ export default function Hero({
                 />
               </motion.div>
               <motion.p className="text-muted-foreground text-sm mt-3">
-                {joinedCount.toLocaleString()} people waiting
+                <CountUp
+                  key={`success-${joinedCount}`}
+                  start={joinedCount > 0 ? joinedCount - 1 : 0}
+                  end={joinedCount}
+                  duration={0.8}
+                  separator=","
+                  useEasing={true}
+                />{" "}
+                people waiting
               </motion.p>
             </motion.div>
           )}

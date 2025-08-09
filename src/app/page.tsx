@@ -1,28 +1,71 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import HowItWorks from "@/components/HowItWorks";
 import Roadmap from "@/components/Roadmap";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 
-const Hero = dynamic(() => import("@/components/Hero"), { 
+const Hero = dynamic(() => import("@/components/Hero"), {
   ssr: false,
-  loading: () => <div className="h-64 w-full" />
+  loading: () => <div className="h-64 w-full" />,
 });
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [joinedCount, setJoinedCount] = useState(1247);
+  const [joinedCount, setJoinedCount] = useState(0);
+  const [initialLoad, setInitialLoad] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    const fetchCount = async () => {
+      try {
+        const response = await fetch("/api/waitlist/count");
+        const data = await response.json();
+        setJoinedCount(data.count);
+        // Set initial load to false after a delay to allow animation
+        setTimeout(() => setInitialLoad(false), 3000);
+      } catch (error) {
+        console.error("Error fetching count:", error);
+        setJoinedCount(1247);
+        setTimeout(() => setInitialLoad(false), 3000);
+      }
+    };
+    fetchCount();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setIsSubmitted(true);
-      setJoinedCount((prev) => prev + 1);
-      setEmail("");
+    if (!email.trim()) return;
+
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setJoinedCount(data.count);
+        setEmail("");
+      } else {
+        setError(data.error || "Something went wrong");
+      }
+    } catch (error) {
+      setError("Network error. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -49,6 +92,10 @@ export default function Home() {
                 isSubmitted={isSubmitted}
                 joinedCount={joinedCount}
                 handleSubmit={handleSubmit}
+                isLoading={isLoading}
+                error={error}
+                setError={setError}
+                initialLoad={initialLoad}
               />
               <HowItWorks />
             </motion.div>
