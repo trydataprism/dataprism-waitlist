@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function Roadmap() {
   const roadmapItems = [
     {
-      title: "Waitlist Platform",
+      title: "Waitlist",
       description: "Early access signup system for product launch",
       status: "completed",
     },
@@ -95,7 +95,9 @@ export default function Roadmap() {
             <div>
               <span className="font-bold text-foreground">{item.title}</span>
               <br />
-              <span className="text-muted-foreground ml-0">{item.description}</span>
+              <span className="text-muted-foreground ml-0">
+                {item.description}
+              </span>
               <br />
               <span
                 className={`text-xs capitalize ${getStatusTextColor(
