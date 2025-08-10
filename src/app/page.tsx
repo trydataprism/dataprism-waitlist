@@ -6,6 +6,7 @@ import HowItWorks from "@/components/HowItWorks";
 import Roadmap from "@/components/Roadmap";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const Hero = dynamic(() => import("@/components/Hero"), {
   ssr: false,
@@ -19,6 +20,7 @@ export default function Home() {
   const [initialLoad, setInitialLoad] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const { mounted } = useTheme();
 
   useEffect(() => {
     const fetchCount = async () => {
@@ -26,16 +28,19 @@ export default function Home() {
         const response = await fetch("/api/waitlist/count");
         const data = await response.json();
         setJoinedCount(data.count);
-        // Set initial load to false after a delay to allow animation
-        setTimeout(() => setInitialLoad(false), 3000);
+        // reduced delay to prevent long white screen
+        setTimeout(() => setInitialLoad(false), 500);
       } catch (error) {
         console.error("Error fetching count:", error);
         setJoinedCount(1247);
-        setTimeout(() => setInitialLoad(false), 3000);
+        setTimeout(() => setInitialLoad(false), 500);
       }
     };
-    fetchCount();
-  }, []);
+
+    if (mounted) {
+      fetchCount();
+    }
+  }, [mounted]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,6 +73,15 @@ export default function Home() {
       setIsLoading(false);
     }
   };
+
+  // show loading state until theme is mounted
+  if (!mounted) {
+    return (
+      <div className="loading-screen">
+        <div className="loading-spinner"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background flex flex-col">

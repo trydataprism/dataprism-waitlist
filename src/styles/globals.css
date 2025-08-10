@@ -118,3 +118,18 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* prevent flash of unstyled content */
+html {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* loading state styles */
+.loading-screen {
+  @apply min-h-screen bg-background flex items-center justify-center;
+}
+
+.loading-spinner {
+  @apply w-8 h-8 border-2 border-muted-foreground/20 border-t-foreground rounded-full animate-spin;
+}

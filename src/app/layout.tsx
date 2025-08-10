@@ -35,8 +35,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${jetBrainsMono.className} antialiased`}>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${jetBrainsMono.className} antialiased`}
+        suppressHydrationWarning
+      >
         <ClientThemeProvider>{children}</ClientThemeProvider>
       </body>
     </html>
