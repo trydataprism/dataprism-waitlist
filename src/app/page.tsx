@@ -62,7 +62,7 @@ export default function Home() {
       } else {
         setError(data.error || "Something went wrong");
       }
-    } catch (error: string | unknown) {
+    } catch {
       setError("Network error. Please try again.");
     } finally {
       setIsLoading(false);
@@ -71,7 +71,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="flex-1 flex items-center justify-center">
+      <main className="flex-1 flex items-center justify-center">
         <motion.div
           className="max-w-6xl mx-auto px-6 py-12"
           initial={{ opacity: 0, y: 12 }}
@@ -79,12 +79,13 @@ export default function Home() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="flex gap-8 items-start">
-            <motion.div
+            <motion.section
               className="flex-1"
               initial={{ opacity: 0, x: -12 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5 }}
+              aria-label="Hero and how it works section"
             >
               <Hero
                 email={email}
@@ -98,26 +99,29 @@ export default function Home() {
                 initialLoad={initialLoad}
               />
               <HowItWorks />
-            </motion.div>
+            </motion.section>
             <motion.div
               className="w-px bg-border self-stretch min-h-96"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              role="separator"
+              aria-hidden="true"
             ></motion.div>
-            <motion.div
+            <motion.section
               className="flex-1"
               initial={{ opacity: 0, x: 12 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5 }}
+              aria-label="Product roadmap section"
             >
               <Roadmap />
-            </motion.div>
+            </motion.section>
           </div>
         </motion.div>
-      </div>
+      </main>
       <Footer />
     </div>
   );

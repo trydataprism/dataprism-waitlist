@@ -64,18 +64,18 @@ export default function Hero({
   };
 
   return (
-    <motion.div variants={container} initial="hidden" animate="show">
+    <motion.header variants={container} initial="hidden" animate="show">
       <motion.div className="flex items-center gap-2" variants={item}>
         <Image
           src={mounted && theme === "dark" ? "/dark_logo.svg" : "/logo.svg"}
-          alt="dataprism logo"
+          alt="DataPrism logo"
           width={25}
           height={25}
         />
         <h1 className="text-3xl font-bold text-foreground">dataprism</h1>
       </motion.div>
 
-      <div className="mb-12 mt-6">
+      <section className="mb-12 mt-6" aria-label="Waitlist signup">
         <motion.div className="text-sm mb-4" variants={item}>
           <p className="font-bold">We built dataprism using dataprism.</p>
           <p className="text-muted-foreground">
@@ -93,6 +93,8 @@ export default function Hero({
               initial={false}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
+              role="form"
+              aria-label="Join DataPrism waitlist"
             >
               <motion.div className="flex gap-3 max-w-md items-stretch" layout>
                 <Input
@@ -108,6 +110,9 @@ export default function Hero({
                   className="rounded-none flex-1 text-sm"
                   required
                   disabled={isLoading}
+                  aria-label="Email address"
+                  aria-describedby={error ? "email-error" : "waitlist-count"}
+                  aria-invalid={error ? "true" : "false"}
                 />
                 <motion.div
                   layoutId="waitlist-cta"
@@ -126,17 +131,22 @@ export default function Hero({
               </motion.div>
               {error && (
                 <motion.p
+                  id="email-error"
                   className="text-red-500 text-sm mt-2"
                   initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
                   variants={item}
+                  role="alert"
+                  aria-live="polite"
                 >
                   {error}
                 </motion.p>
               )}
               <motion.p
+                id="waitlist-count"
                 className="text-muted-foreground text-sm mt-3"
                 variants={item}
+                aria-live="polite"
               >
                 <CountUp
                   key={`form-${joinedCount}-${initialLoad}`}
@@ -195,7 +205,7 @@ export default function Hero({
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-    </motion.div>
+      </section>
+    </motion.header>
   );
 }

@@ -65,22 +65,23 @@ export default function Roadmap() {
   };
 
   return (
-    <motion.div
+    <motion.section
       className="mb-12"
       variants={container}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
+      aria-label="Product development roadmap"
     >
-      <motion.h3
+      <motion.h2
         className="text-lg font-bold mb-6 text-foreground"
         variants={itemVariant}
       >
         Roadmap
-      </motion.h3>
-      <div className="space-y-4 text-sm">
+      </motion.h2>
+      <ul className="space-y-4 text-sm list-none">
         {roadmapItems.map((item, index) => (
-          <motion.div
+          <motion.li
             key={index}
             className="flex items-start gap-3"
             variants={itemVariant}
@@ -91,14 +92,14 @@ export default function Roadmap() {
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               viewport={{ once: true }}
+              role="img"
+              aria-label={`Status: ${item.status.replace("_", " ")}`}
             />
             <div>
-              <span className="font-bold text-foreground">{item.title}</span>
-              <br />
-              <span className="text-muted-foreground ml-0">
+              <h3 className="font-bold text-foreground">{item.title}</h3>
+              <p className="text-muted-foreground ml-0">
                 {item.description}
-              </span>
-              <br />
+              </p>
               <span
                 className={`text-xs capitalize ${getStatusTextColor(
                   item.status
@@ -107,9 +108,9 @@ export default function Roadmap() {
                 {item.status.replace("_", " ")}
               </span>
             </div>
-          </motion.div>
+          </motion.li>
         ))}
-      </div>
-    </motion.div>
+      </ul>
+    </motion.section>
   );
 }
