@@ -3,15 +3,15 @@
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 
-const ThemeToggle = dynamic(() => import("./ThemeToggle"), { 
+const ThemeToggle = dynamic(() => import("./ThemeToggle"), {
   ssr: false,
-  loading: () => <div className="w-9 h-9" />
+  loading: () => <div className="w-9 h-9" />,
 });
 
 export default function Footer() {
   return (
     <motion.footer
-      className="pt-8 pb-6 border-t border-border"
+      className="pt-3 pb-4 border-t border-border"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -22,7 +22,10 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <p className="text-muted-foreground text-sm">© 2025 dataprism</p>
 
-          <nav className="flex items-center justify-between w-full sm:w-auto gap-6" aria-label="Social media links">
+          <nav
+            className="flex items-center justify-between w-full sm:w-auto gap-6"
+            aria-label="Social media links"
+          >
             <ul className="flex items-center gap-3 list-none">
               <li>
                 <a

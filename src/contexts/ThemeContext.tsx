@@ -35,7 +35,45 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [theme, mounted]);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === "light" ? "dark" : "light");
+    const newTheme = theme === "light" ? "dark" : "light";
+    
+    // Create overlay element for transition animation
+    const overlay = document.createElement('div');
+    overlay.className = 'theme-transition-overlay';
+    overlay.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: ${newTheme === 'dark' ? 'oklch(0.145 0 0)' : 'oklch(1 0 0)'};
+      z-index: 9999;
+      transform: translateY(-100%);
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    `;
+    
+    document.body.appendChild(overlay);
+    
+    // Start animation
+    requestAnimationFrame(() => {
+      overlay.style.transform = 'translateY(0%)';
+    });
+    
+    // Change theme at halfway point
+    setTimeout(() => {
+      setTheme(newTheme);
+    }, 250);
+    
+    // Complete animation and cleanup
+    setTimeout(() => {
+      overlay.style.transform = 'translateY(100%)';
+      setTimeout(() => {
+        if (overlay.parentNode) {
+          overlay.parentNode.removeChild(overlay);
+        }
+      }, 500);
+    }, 250);
   };
 
   if (!mounted) {
