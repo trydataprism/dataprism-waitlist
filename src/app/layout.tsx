@@ -9,23 +9,33 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://dataprism.app"),
   title: "Dataprism - Website Analytics Dashboard",
   description:
     "Join the waitlist for Dataprism, a powerful real-time analytics platform.",
   icons: {
-    icon: "/dark_logo.svg",
+    icon: { url: "/metadata_logo.svg" },
   },
   openGraph: {
     title: "Dataprism - Website Analytics Dashboard",
     description:
       "Join the waitlist for Dataprism, a powerful real-time analytics platform.",
     type: "website",
+    images: [
+      {
+        url: "/x.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Dataprism - Website Analytics Dashboard",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dataprism - Website Analytics Dashboard",
     description:
       "Join the waitlist for Dataprism, a powerful real-time analytics platform.",
+    images: ["/x.jpg"],
   },
 };
 

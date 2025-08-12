@@ -17,7 +17,7 @@ export default function Roadmap() {
     {
       title: "Advanced User Segmentation",
       description: "Group visitors by behavior and demographics",
-      status: "not_started",
+      status: "in_progress",
     },
     {
       title: "Custom Event Tracking",
@@ -97,9 +97,7 @@ export default function Roadmap() {
             />
             <div>
               <h3 className="font-bold text-foreground">{item.title}</h3>
-              <p className="text-muted-foreground ml-0">
-                {item.description}
-              </p>
+              <p className="text-muted-foreground ml-0">{item.description}</p>
               <span
                 className={`text-xs capitalize ${getStatusTextColor(
                   item.status
