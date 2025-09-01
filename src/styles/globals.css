@@ -133,3 +133,45 @@ html {
 .loading-spinner {
   @apply w-8 h-8 border-2 border-muted-foreground/20 border-t-foreground rounded-full animate-spin;
 }
+
+.dashed-line {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 6px,
+    currentColor 6px,
+    currentColor 16px
+  );
+  background-size: 1px 16px;
+  animation: dashSlideVertical 1.8s linear infinite;
+}
+
+.dashed-line-horizontal {
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0px,
+    transparent 6px,
+    currentColor 6px,
+    currentColor 16px
+  );
+  background-size: 16px 1px;
+  animation: dashSlideHorizontal 1.8s linear infinite;
+}
+
+@keyframes dashSlideVertical {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 16px;
+  }
+}
+
+@keyframes dashSlideHorizontal {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 16px 0;
+  }
+}
