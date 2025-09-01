@@ -140,7 +140,7 @@ export default function Home() {
         <div className="flex">
           {/* Sol çizgi devamı */}
           <div className="w-px dashed-line text-foreground/10"></div>
-          
+
           {/* Footer alanı */}
           <div className="w-[50vw] relative">
             <div className="h-px dashed-line-horizontal text-foreground/10 w-full"></div>
@@ -149,7 +149,7 @@ export default function Home() {
             </div>
             <div className="h-px dashed-line-horizontal text-foreground/10 w-full mt-2"></div>
           </div>
-          
+
           {/* Sağ çizgi devamı */}
           <div className="w-px dashed-line text-foreground/10"></div>
         </div>

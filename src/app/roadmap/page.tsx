@@ -7,7 +7,7 @@ import Prism from "@/components/ui/prism";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
-export default function WhoWeAre() {
+export default function Roadmap() {
   const { mounted } = useTheme();
 
   if (!mounted) {
@@ -71,12 +71,12 @@ export default function WhoWeAre() {
             </div>
 
             {/* İçerik - ön planda */}
-            <div className="relative z-10">
+            <div className="relative z-10 w-full flex items-center justify-center">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-center max-w-lg mx-auto font-sans"
+                className="text-center max-w-lg mx-auto"
               >
                 <motion.div
                   className="mb-8"
@@ -95,25 +95,76 @@ export default function WhoWeAre() {
                     </p>
                   </motion.div>
 
-                  <h1 className="text-4xl font-bold text-white mb-6">
-                    Who We Are
+                  <h1 className="text-4xl font-bold text-white mb-8">
+                    Roadmap
                   </h1>
-                  <div className="space-y-4 text-white/80 text-sm leading-relaxed">
-                    <p>
-                      We are a team of data scientists, engineers, and designers
-                      passionate about making data analysis accessible to
-                      everyone.
-                    </p>
-                    <p>
-                      Dataprism is built on the belief that powerful data
-                      insights shouldn't require complex tools or extensive
-                      technical knowledge.
-                    </p>
-                    <p>
-                      Our mission is to democratize data visualization and
-                      analysis, empowering teams to make better decisions
-                      through intuitive, beautiful data experiences.
-                    </p>
+
+                  {/* Roadmap Items */}
+                  <div className="space-y-6">
+                    {[
+                      {
+                        title: "Waitlist",
+                        description:
+                          "Early access signup system for product launch",
+                        status: "completed",
+                      },
+                      {
+                        title: "Real-time Analytics Dashboard",
+                        description:
+                          "Live visitor tracking with instant data updates",
+                        status: "in_progress",
+                      },
+                      {
+                        title: "Advanced User Segmentation",
+                        description:
+                          "Group visitors by behavior and demographics",
+                        status: "in_progress",
+                      },
+                      {
+                        title: "Custom Event Tracking",
+                        description: "Track specific actions and conversions",
+                        status: "not_started",
+                      },
+                      {
+                        title: "AI-Powered Insights",
+                        description:
+                          "Automated recommendations and predictions",
+                        status: "not_started",
+                      },
+                    ].map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          delay: 0.3 + index * 0.1,
+                          duration: 0.5,
+                        }}
+                        className="text-center"
+                      >
+                        <h3 className="text-lg font-bold text-white mb-2">
+                          {item.title}
+                        </h3>
+                        <p className="text-white/70 text-sm mb-2">
+                          {item.description}
+                        </p>
+                        <span
+                          className={`text-xs font-medium ${
+                            item.status === "completed"
+                              ? "text-green-400"
+                              : item.status === "in_progress"
+                              ? "text-blue-400"
+                              : "text-gray-400"
+                          }`}
+                        >
+                          {item.status === "completed"
+                            ? "completed"
+                            : item.status === "in_progress"
+                            ? "in progress"
+                            : "not started"}
+                        </span>
+                      </motion.div>
+                    ))}
                   </div>
                 </motion.div>
               </motion.div>

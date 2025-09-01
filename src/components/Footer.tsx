@@ -30,6 +30,14 @@ export default function Footer() {
 
         <div className="flex items-center gap-3">
           <Link
+            href="/roadmap"
+            className="text-muted-foreground hover:text-foreground transition-colors text-xs"
+            aria-label="Roadmap"
+          >
+            Roadmap
+          </Link>
+          <h1 className="text-muted-foreground transition-colors text-xs">/</h1>
+          <Link
             href="/who-we-are"
             className="text-muted-foreground hover:text-foreground transition-colors text-xs"
             aria-label="Who we are"
