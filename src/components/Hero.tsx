@@ -3,10 +3,8 @@
 import type React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
-import { ArrowUpRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useState, useEffect } from "react";
 import CountUp from "react-countup";
 
@@ -34,7 +32,6 @@ export default function Hero({
   initialLoad,
 }: HeroProps) {
   const [mounted, setMounted] = useState(false);
-  const { theme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -64,25 +61,29 @@ export default function Hero({
   };
 
   return (
-    <motion.header variants={container} initial="hidden" animate="show">
-      <motion.div className="flex items-center gap-2" variants={item}>
-        <Image
-          src={mounted && theme === "dark" ? "/dark_logo.svg" : "/logo.svg"}
-          alt="DataPrism logo"
-          width={25}
-          height={25}
-        />
-        <h1 className="text-3xl font-bold text-foreground">dataprism</h1>
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className="text-center max-w-md mx-auto"
+    >
+      <motion.div className="mb-6" variants={item}>
+        {/* Waitlist banner */}
+        <div className="inline-block bg-teal-400/20 border border-teal-400/30 rounded-lg px-4 py-2 mb-4 shadow-[0_0_20px_rgba(20,184,166,0.3)]">
+          <p className="text-teal-400 font-mono text-sm font-bold tracking-wide drop-shadow-[0_0_8px_rgba(20,184,166,0.8)]">
+            WAITLIST IS NOW OPEN
+          </p>
+        </div>
+
+        <h1 className="text-2xl font-bold text-white mb-2">
+          Dataprism is launching soon.
+        </h1>
+        <p className="text-white/80 text-sm">
+          Get on the waitlist and be among the first to get access to Dataprism.
+        </p>
       </motion.div>
 
-      <section className="mb-12 mt-6" aria-label="Waitlist signup">
-        <motion.div className="text-sm mb-4" variants={item}>
-          <p className="font-bold">We built dataprism using dataprism.</p>
-          <p className="text-muted-foreground">
-            We think you&apos;ll like it as much as we do.
-          </p>
-        </motion.div>
-
+      <section aria-label="Waitlist signup">
         <AnimatePresence mode="popLayout" initial={false}>
           {!isSubmitted ? (
             <motion.form
@@ -94,12 +95,15 @@ export default function Hero({
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
               role="form"
-              aria-label="Join DataPrism waitlist"
+              aria-label="Join Dataprism waitlist"
             >
-              <motion.div className="flex gap-3 max-w-md items-stretch" layout>
+              <motion.div
+                className="flex gap-3 max-w-md items-stretch mx-auto"
+                layout
+              >
                 <Input
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder="Enter your email"
                   value={email}
                   onChange={(e: unknown) => {
                     setEmail(
@@ -107,7 +111,7 @@ export default function Hero({
                     );
                     if (error) setError("");
                   }}
-                  className="rounded-none flex-1 text-sm"
+                  className="rounded-lg flex-1 text-sm bg-gray-800 border-gray-700 text-white placeholder-gray-400"
                   required
                   disabled={isLoading}
                   aria-label="Email address"
@@ -121,11 +125,10 @@ export default function Hero({
                 >
                   <Button
                     type="submit"
-                    className="rounded-none bg-primary hover:bg-primary/90 text-primary-foreground px-6 text-sm cursor-pointer"
+                    className="rounded-lg bg-white hover:bg-white/90 text-black px-6 text-sm cursor-pointer"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Joining..." : "Join Waitlist"}{" "}
-                    <ArrowUpRight className="size-4" />
+                    {isLoading ? "Joining..." : "Join now"}
                   </Button>
                 </motion.div>
               </motion.div>
@@ -144,7 +147,7 @@ export default function Hero({
               )}
               <motion.p
                 id="waitlist-count"
-                className="text-muted-foreground text-sm mt-3"
+                className="text-white/60 text-sm mt-3"
                 variants={item}
                 aria-live="polite"
               >
@@ -171,7 +174,7 @@ export default function Hero({
             >
               <motion.div
                 layoutId="waitlist-cta"
-                className="relative inline-flex items-center gap-2  px-4 py-1.5 text-sm text-primary-foreground bg-primary"
+                className="relative inline-flex items-center gap-2 px-4 py-1.5 text-sm text-black bg-white rounded-lg"
                 initial={false}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 300, damping: 22 }}
@@ -179,19 +182,19 @@ export default function Hero({
                 <Check className="size-4" />
                 <span>you&apos;re on the waitlist</span>
                 <motion.span
-                  className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary"
+                  className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white"
                   initial={{ scale: 0.6, opacity: 0.25 }}
                   animate={{ scale: 1.35, opacity: 0 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
                 />
                 <motion.span
-                  className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary"
+                  className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white"
                   initial={{ scale: 0.5, opacity: 0.35 }}
                   animate={{ scale: 1.4, opacity: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut", delay: 0.05 }}
                 />
               </motion.div>
-              <motion.p className="text-muted-foreground text-sm mt-3">
+              <motion.p className="text-white/60 text-sm mt-3">
                 <CountUp
                   key={`success-${joinedCount}`}
                   start={joinedCount > 0 ? joinedCount - 1 : 0}
@@ -206,6 +209,6 @@ export default function Hero({
           )}
         </AnimatePresence>
       </section>
-    </motion.header>
+    </motion.div>
   );
 }

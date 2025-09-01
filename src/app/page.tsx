@@ -85,81 +85,58 @@ export default function Home() {
   }
 
   return (
-    // <div className="min-h-screen bg-background flex flex-col">
-    //   <main className="flex-1 flex items-center justify-center">
-    //     <motion.div
-    //       className="max-w-6xl mx-auto px-6 py-12"
-    //       initial={{ opacity: 0, y: 12 }}
-    //       animate={{ opacity: 1, y: 0 }}
-    //       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-    //     >
-    //       <div className="flex gap-8 items-start">
-    //         <motion.section
-    //           className="flex-1"
-    //           initial={{ opacity: 0, x: -12 }}
-    //           whileInView={{ opacity: 1, x: 0 }}
-    //           viewport={{ once: true, amount: 0.2 }}
-    //           transition={{ duration: 0.5 }}
-    //           aria-label="Hero and how it works section"
-    //         >
-    //           <Hero
-    //             email={email}
-    //             setEmail={setEmail}
-    //             isSubmitted={isSubmitted}
-    //             joinedCount={joinedCount}
-    //             handleSubmit={handleSubmit}
-    //             isLoading={isLoading}
-    //             error={error}
-    //             setError={setError}
-    //             initialLoad={initialLoad}
-    //           />
-    //           <HowItWorks />
-    //         </motion.section>
-    //         <motion.div
-    //           className="w-px bg-border self-stretch min-h-96"
-    //           initial={{ opacity: 0 }}
-    //           whileInView={{ opacity: 1 }}
-    //           viewport={{ once: true }}
-    //           transition={{ duration: 0.6 }}
-    //           role="separator"
-    //           aria-hidden="true"
-    //         ></motion.div>
-    //         <motion.section
-    //           className="flex-1"
-    //           initial={{ opacity: 0, x: 12 }}
-    //           whileInView={{ opacity: 1, x: 0 }}
-    //           viewport={{ once: true, amount: 0.2 }}
-    //           transition={{ duration: 0.5 }}
-    //           aria-label="Product roadmap section"
-    //         >
-    //           <Roadmap />
-    //         </motion.section>
-    //       </div>
-    //     </motion.div>
-    //   </main>
-    //   <Footer />
-    // </div>
-    <div className="min-h-screen w-full bg-background flex justify-center items-center bg-black">
-      <div className="flex items-start">
-        <div className="w-px h-screen dashed-line text-foreground/10"></div>
-        <div className="w-[50vw] flex flex-col">
-          <div className="h-[50vh]">
-            <Prism
-              animationType="rotate"
-              timeScale={0.5}
-              height={3.5}
-              baseWidth={5.5}
-              scale={1.5}
-              hueShift={0}
-              colorFrequency={1}
-              noise={0.5}
-              glow={1}
-            />
+    <div className="min-h-screen w-full bg-background flex flex-col bg-black">
+      {/* Üst çizgi */}
+
+      {/* Ana içerik */}
+      <div className="flex-1 flex items-center justify-center">
+        <div className="flex items-start">
+          {/* Sol çizgi */}
+          <div className="w-px h-screen dashed-line text-foreground/10"></div>
+
+          {/* Orta bölüm - Üçgen ve Hero */}
+          <div className="w-[50vw] flex flex-col">
+            {/* Üçgen bölümü */}
+            <div className="h-[50vh] flex items-center justify-center">
+              <Prism
+                animationType="rotate"
+                timeScale={0.5}
+                height={3.5}
+                baseWidth={5.5}
+                scale={1.5}
+                hueShift={0}
+                colorFrequency={1}
+                noise={0.5}
+                glow={1}
+              />
+            </div>
+
+            {/* Orta yatay çizgi */}
+            <div className="w-full h-px dashed-line-horizontal text-foreground/10"></div>
+
+            {/* Hero bileşeni - Waitlist formu */}
+            <div className="h-[50vh] flex items-center justify-center mb-8">
+              <Hero
+                email={email}
+                setEmail={setEmail}
+                isSubmitted={isSubmitted}
+                joinedCount={joinedCount}
+                handleSubmit={handleSubmit}
+                isLoading={isLoading}
+                error={error}
+                setError={setError}
+                initialLoad={initialLoad}
+              />
+            </div>
           </div>
-          <div className="w-full h-px dashed-line-horizontal text-foreground/10"></div>
+
+          {/* Sağ çizgi */}
+          <div className="w-px h-screen dashed-line text-foreground/10"></div>
         </div>
-        <div className="w-px h-screen dashed-line text-foreground/10"></div>
       </div>
+
+      {/* Alt çizgi */}
+      <div className="w-full h-px dashed-line-horizontal text-foreground/10"></div>
     </div>
   );
 }
