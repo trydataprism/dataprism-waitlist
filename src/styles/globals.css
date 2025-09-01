@@ -147,7 +147,7 @@ html {
     currentColor 16px
   );
   background-size: 1px 16px;
-  animation: dashSlideVertical 1.8s linear infinite;
+  animation: dashSlideVertical 1s linear infinite;
 }
 
 .dashed-line-horizontal {
@@ -159,7 +159,7 @@ html {
     currentColor 16px
   );
   background-size: 16px 1px;
-  animation: dashSlideHorizontal 1.8s linear infinite;
+  animation: dashSlideHorizontal 1s linear infinite;
 }
 
 @keyframes dashSlideVertical {

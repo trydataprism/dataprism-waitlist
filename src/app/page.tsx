@@ -85,37 +85,39 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-background flex flex-col bg-black">
-      {/* Üst çizgi */}
+    <div className="min-h-screen w-full bg-background bg-black flex items-center justify-center">
+      <div className="flex flex-col h-screen pt-6 pb-6">
+        {/* Üst çizgi */}
+        <div
+          className="h-px dashed-line-horizontal text-foreground/10"
+          style={{ width: "calc(50vw + 2px)" }}
+        ></div>
 
-      {/* Ana içerik */}
-      <div className="flex-1 flex items-center justify-center">
-        <div className="flex items-start">
+        {/* Ana içerik ve çizgiler */}
+        <div className="flex-1 flex">
           {/* Sol çizgi */}
-          <div className="w-px h-screen dashed-line text-foreground/10"></div>
+          <div className="w-px dashed-line text-foreground/10"></div>
 
-          {/* Orta bölüm - Üçgen ve Hero */}
-          <div className="w-[50vw] flex flex-col">
-            {/* Üçgen bölümü */}
-            <div className="h-[50vh] flex items-center justify-center">
+          {/* Orta bölüm - Üçgen ve Hero iç içe */}
+          <div className="w-[50vw] flex items-center justify-center relative">
+            {/* Üçgen bölümü - arka planda */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-30">
               <Prism
                 animationType="rotate"
-                timeScale={0.5}
+                timeScale={0.3}
                 height={3.5}
                 baseWidth={5.5}
                 scale={1.5}
                 hueShift={0}
                 colorFrequency={1}
-                noise={0.5}
-                glow={1}
+                noise={0.3}
+                glow={0.8}
+                suspendWhenOffscreen={true}
               />
             </div>
 
-            {/* Orta yatay çizgi */}
-            <div className="w-full h-px dashed-line-horizontal text-foreground/10"></div>
-
-            {/* Hero bileşeni - Waitlist formu */}
-            <div className="h-[50vh] flex items-center justify-center mb-8">
+            {/* Hero bileşeni - ön planda */}
+            <div className="relative z-10">
               <Hero
                 email={email}
                 setEmail={setEmail}
@@ -131,12 +133,27 @@ export default function Home() {
           </div>
 
           {/* Sağ çizgi */}
-          <div className="w-px h-screen dashed-line text-foreground/10"></div>
+          <div className="w-px dashed-line text-foreground/10"></div>
+        </div>
+
+        {/* Alt çizgi ve Footer - sol ve sağ çizgilerle birlikte */}
+        <div className="flex">
+          {/* Sol çizgi devamı */}
+          <div className="w-px dashed-line text-foreground/10"></div>
+          
+          {/* Footer alanı */}
+          <div className="w-[50vw] relative">
+            <div className="h-px dashed-line-horizontal text-foreground/10 w-full"></div>
+            <div className="flex justify-center mt-2">
+              <Footer />
+            </div>
+            <div className="h-px dashed-line-horizontal text-foreground/10 w-full mt-2"></div>
+          </div>
+          
+          {/* Sağ çizgi devamı */}
+          <div className="w-px dashed-line text-foreground/10"></div>
         </div>
       </div>
-
-      {/* Alt çizgi */}
-      <div className="w-full h-px dashed-line-horizontal text-foreground/10"></div>
     </div>
   );
 }

@@ -65,20 +65,20 @@ export default function Hero({
       variants={container}
       initial="hidden"
       animate="show"
-      className="text-center max-w-md mx-auto"
+      className="text-center max-w-lg mx-auto font-sans"
     >
       <motion.div className="mb-6" variants={item}>
         {/* Waitlist banner */}
-        <div className="inline-block bg-teal-400/20 border border-teal-400/30 rounded-lg px-4 py-2 mb-4 shadow-[0_0_20px_rgba(20,184,166,0.3)]">
-          <p className="text-teal-400 font-mono text-sm font-bold tracking-wide drop-shadow-[0_0_8px_rgba(20,184,166,0.8)]">
+        <div className="inline-block bg-teal-400/20 rounded-lg px-2.5 py-1 mb-4">
+          <p className="text-teal-400 font-mono text-xs font-bold tracking-wide">
             WAITLIST IS NOW OPEN
           </p>
         </div>
 
-        <h1 className="text-2xl font-bold text-white mb-2">
+        <h1 className="text-4xl font-bold text-white mb-2">
           Dataprism is launching soon.
         </h1>
-        <p className="text-white/80 text-sm">
+        <p className="text-white/80 text-sm pt-0.5">
           Get on the waitlist and be among the first to get access to Dataprism.
         </p>
       </motion.div>
@@ -111,7 +111,7 @@ export default function Hero({
                     );
                     if (error) setError("");
                   }}
-                  className="rounded-lg flex-1 text-sm bg-gray-800 border-gray-700 text-white placeholder-gray-400"
+                  className="rounded-lg flex-1 text-sm bg-gray-800 text-white placeholder-gray-400 border-0 focus-visible:ring-1 focus-visible:ring-white/30 focus-visible:border-white/40 focus:outline-none"
                   required
                   disabled={isLoading}
                   aria-label="Email address"
@@ -125,7 +125,7 @@ export default function Hero({
                 >
                   <Button
                     type="submit"
-                    className="rounded-lg bg-white hover:bg-white/90 text-black px-6 text-sm cursor-pointer"
+                    className="bg-white text-black px-6 cursor-pointer hover:shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:brightness-107 transition-all duration-300"
                     disabled={isLoading}
                   >
                     {isLoading ? "Joining..." : "Join now"}
@@ -152,11 +152,11 @@ export default function Hero({
                 aria-live="polite"
               >
                 <CountUp
-                  key={`form-${joinedCount}-${initialLoad}`}
-                  start={initialLoad ? 0 : joinedCount}
+                  key={`form-${joinedCount}-${mounted}`}
+                  start={0}
                   end={joinedCount}
-                  duration={initialLoad ? 1.8 : 0}
-                  delay={initialLoad ? 0.5 : 0}
+                  duration={2}
+                  delay={0.5}
                   separator=","
                   useEasing={true}
                 />{" "}
@@ -173,33 +173,37 @@ export default function Hero({
               className="mb-4"
             >
               <motion.div
-                layoutId="waitlist-cta"
                 className="relative inline-flex items-center gap-2 px-4 py-1.5 text-sm text-black bg-white rounded-lg"
-                initial={false}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 22 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
               >
-                <Check className="size-4" />
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{
+                    delay: 0.2,
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 30,
+                  }}
+                >
+                  <Check className="size-4 text-black" />
+                </motion.div>
                 <span>you&apos;re on the waitlist</span>
-                <motion.span
-                  className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white"
-                  initial={{ scale: 0.6, opacity: 0.25 }}
-                  animate={{ scale: 1.35, opacity: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                />
-                <motion.span
-                  className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white"
-                  initial={{ scale: 0.5, opacity: 0.35 }}
-                  animate={{ scale: 1.4, opacity: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.05 }}
-                />
               </motion.div>
-              <motion.p className="text-white/60 text-sm mt-3">
+              <motion.p
+                className="text-white/60 text-sm mt-3"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+              >
                 <CountUp
                   key={`success-${joinedCount}`}
-                  start={joinedCount > 0 ? joinedCount - 1 : 0}
+                  start={joinedCount > 1 ? joinedCount - 1 : 0}
                   end={joinedCount}
                   duration={0.8}
+                  delay={0.3}
                   separator=","
                   useEasing={true}
                 />{" "}
