@@ -71,12 +71,12 @@ export default function Roadmap() {
             </div>
 
             {/* İçerik - ön planda */}
-            <div className="relative z-10 w-full flex items-center justify-center">
+            <div className="relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-center max-w-lg mx-auto"
+                className="text-center max-w-xl mx-auto font-sans"
               >
                 <motion.div
                   className="mb-8"
@@ -95,76 +95,84 @@ export default function Roadmap() {
                     </p>
                   </motion.div>
 
-                  <h1 className="text-4xl font-bold text-white mb-8">
+                  <h1 className="text-4xl font-bold text-white mb-6">
                     Roadmap
                   </h1>
+                  <div className="space-y-4 text-white/80 text-sm leading-relaxed">
+                    <p>
+                      We're building Dataprism with transparency and your
+                      feedback in mind. Here's what we're working on and what's
+                      coming next.
+                    </p>
+                    <div className="flex gap-8 mt-6 justify-center">
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                          <span className="text-white font-medium">
+                            Waitlist & Early Access
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-blue-400"></div>
+                          <span className="text-white font-medium">
+                            Real-time Dashboard
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-blue-400"></div>
+                          <span className="text-white font-medium">
+                            Advanced User Segmentation
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+                          <span className="text-white font-medium">
+                            Custom Event Tracking
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+                          <span className="text-white font-medium">
+                            AI-Powered Insights
+                          </span>
+                        </div>
+                      </div>
 
-                  {/* Roadmap Items */}
-                  <div className="space-y-6">
-                    {[
-                      {
-                        title: "Waitlist",
-                        description:
-                          "Early access signup system for product launch",
-                        status: "completed",
-                      },
-                      {
-                        title: "Real-time Analytics Dashboard",
-                        description:
-                          "Live visitor tracking with instant data updates",
-                        status: "in_progress",
-                      },
-                      {
-                        title: "Advanced User Segmentation",
-                        description:
-                          "Group visitors by behavior and demographics",
-                        status: "in_progress",
-                      },
-                      {
-                        title: "Custom Event Tracking",
-                        description: "Track specific actions and conversions",
-                        status: "not_started",
-                      },
-                      {
-                        title: "AI-Powered Insights",
-                        description:
-                          "Automated recommendations and predictions",
-                        status: "not_started",
-                      },
-                    ].map((item, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          delay: 0.3 + index * 0.1,
-                          duration: 0.5,
-                        }}
-                        className="text-center"
-                      >
-                        <h3 className="text-lg font-bold text-white mb-2">
-                          {item.title}
-                        </h3>
-                        <p className="text-white/70 text-sm mb-2">
-                          {item.description}
-                        </p>
-                        <span
-                          className={`text-xs font-medium ${
-                            item.status === "completed"
-                              ? "text-green-400"
-                              : item.status === "in_progress"
-                              ? "text-blue-400"
-                              : "text-gray-400"
-                          }`}
-                        >
-                          {item.status === "completed"
-                            ? "completed"
-                            : item.status === "in_progress"
-                            ? "in progress"
-                            : "not started"}
-                        </span>
-                      </motion.div>
-                    ))}
+                      <div className="w-px bg-white/10"></div>
+
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+                          <span className="text-white font-medium">
+                            Team Collaboration
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+                          <span className="text-white font-medium">
+                            API Integration
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+                          <span className="text-white font-medium">
+                            White-label Solutions
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+                          <span className="text-white font-medium">
+                            Mobile App
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+                          <span className="text-white font-medium">
+                            Enterprise Features
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
               </motion.div>

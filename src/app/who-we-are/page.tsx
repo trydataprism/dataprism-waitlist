@@ -114,6 +114,7 @@ export default function WhoWeAre() {
                       analysis, empowering teams to make better decisions
                       through intuitive, beautiful data experiences.
                     </p>
+                    <p className="text-white">hello@dataprism.app</p>
                   </div>
                 </motion.div>
               </motion.div>
