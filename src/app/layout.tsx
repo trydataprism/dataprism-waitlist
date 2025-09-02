@@ -15,14 +15,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dataprism.app"),
-  title: "Dataprism - Website Analytics Dashboard",
+  title: "Dataprism | Waitlist",
   description:
     "Join the waitlist for Dataprism, a powerful real-time analytics platform.",
   icons: {
     icon: { url: "/metadata_logo.svg" },
   },
   openGraph: {
-    title: "Dataprism - Website Analytics Dashboard",
+    title: "Dataprism | Waitlist",
     description:
       "Join the waitlist for Dataprism, a powerful real-time analytics platform.",
     type: "website",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dataprism - Website Analytics Dashboard",
+    title: "Dataprism | Waitlist",
     description:
       "Join the waitlist for Dataprism, a powerful real-time analytics platform.",
     images: ["/x.jpg"],

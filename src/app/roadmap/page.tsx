@@ -19,24 +19,24 @@ export default function Roadmap() {
 
   return (
     <div className="min-h-screen w-full bg-background bg-black flex items-center justify-center">
-      <div className="flex flex-col h-screen pt-6 pb-6">
+      <div className="flex flex-col h-screen pt-6 pb-6 max-w-screen-2xl mx-auto">
         {/* Üst çizgi */}
         <div
-          className="h-px dashed-line-horizontal text-foreground/10"
+          className="h-px dashed-line-horizontal text-foreground/10 md:block hidden"
           style={{ width: "calc(50vw + 2px)" }}
         ></div>
 
         {/* Ana içerik ve çizgiler */}
         <div className="flex-1 flex">
-          {/* Sol çizgi */}
-          <div className="w-px dashed-line text-foreground/10"></div>
+          {/* Sol çizgi - sadece desktop */}
+          <div className="w-px dashed-line text-foreground/10 md:block hidden"></div>
 
           {/* Orta bölüm - Üçgen ve içerik iç içe */}
-          <div className="w-[50vw] flex items-center justify-center relative">
+          <div className="w-full md:w-[50vw] flex items-center justify-center relative px-4 md:px-0">
             {/* Back button */}
             <Link
               href="/"
-              className="absolute top-6 left-6 z-20 bg-black/30 hover:bg-black/50 text-white/70 hover:text-white px-2 py-1.5 rounded-md transition-all duration-200 flex items-center gap-1.5 cursor-pointer text-sm"
+              className="absolute top-4 left-4 md:top-6 md:left-6 z-20 bg-black/30 hover:bg-black/50 text-white/70 hover:text-white px-2 py-1.5 rounded-md transition-all duration-200 flex items-center gap-1.5 cursor-pointer text-sm"
             >
               <svg
                 className="w-3 h-3"
@@ -54,7 +54,7 @@ export default function Roadmap() {
               Back
             </Link>
             {/* Üçgen bölümü - arka planda */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-30">
+            <div className="absolute inset-0 flex items-center justify-center opacity-20 md:opacity-30">
               <Prism
                 animationType="rotate"
                 timeScale={0.3}
@@ -70,12 +70,12 @@ export default function Roadmap() {
             </div>
 
             {/* İçerik - ön planda */}
-            <div className="relative z-10">
+            <div className="relative z-10 w-full">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-center max-w-xl mx-auto font-sans"
+                className="text-center max-w-xl mx-auto font-sans px-4"
               >
                 <motion.div
                   className="mb-8"
@@ -94,7 +94,7 @@ export default function Roadmap() {
                     </p>
                   </motion.div>
 
-                  <h1 className="text-4xl font-bold text-white mb-6">
+                  <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
                     Roadmap
                   </h1>
                   <div className="space-y-4 text-white/80 text-sm leading-relaxed">
@@ -103,70 +103,71 @@ export default function Roadmap() {
                       feedback in mind. Here&apos;s what we&apos;re working on
                       and what&apos;s coming next.
                     </p>
-                    <div className="flex gap-8 mt-6 justify-center">
+                    <div className="flex flex-col md:flex-row gap-8 mt-6 justify-center">
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-teal-400/20 border border-teal-400/40 shadow-sm shadow-teal-400/20"></div>
-                          <span className="text-white font-medium">
+                          <div className="w-2 h-2 rounded-full bg-teal-400/20 border border-teal-400/40 shadow-sm shadow-teal-400/20 flex-shrink-0"></div>
+                          <span className="text-white font-medium text-left">
                             Waitlist & Early Access
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-teal-400/20 border border-teal-400/40 shadow-sm shadow-teal-400/20"></div>
-                          <span className="text-white font-medium">
+                          <div className="w-2 h-2 rounded-full bg-teal-400/20 border border-teal-400/40 shadow-sm shadow-teal-400/20 flex-shrink-0"></div>
+                          <span className="text-white font-medium text-left">
                             Real-time Dashboard
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
-                          <span className="text-white/60 font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20 flex-shrink-0"></div>
+                          <span className="text-white/60 font-medium text-left">
                             Advanced User Segmentation
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
-                          <span className="text-white/60 font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20 flex-shrink-0"></div>
+                          <span className="text-white/60 font-medium text-left">
                             Custom Event Tracking
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
-                          <span className="text-white/60 font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20 flex-shrink-0"></div>
+                          <span className="text-white/60 font-medium text-left">
                             AI-Powered Insights
                           </span>
                         </div>
                       </div>
 
-                      <div className="w-px bg-white/10"></div>
+                      <div className="w-px bg-white/10 hidden md:block"></div>
+                      <div className="h-px bg-white/10 block md:hidden"></div>
 
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
-                          <span className="text-white/60 font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20 flex-shrink-0"></div>
+                          <span className="text-white/60 font-medium text-left">
                             Team Collaboration
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
-                          <span className="text-white/60 font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20 flex-shrink-0"></div>
+                          <span className="text-white/60 font-medium text-left">
                             API Integration
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
-                          <span className="text-white/60 font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20 flex-shrink-0"></div>
+                          <span className="text-white/60 font-medium text-left">
                             White-label Solutions
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
-                          <span className="text-white/60 font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20 flex-shrink-0"></div>
+                          <span className="text-white/60 font-medium text-left">
                             Mobile App
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
-                          <span className="text-white/60 font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20 flex-shrink-0"></div>
+                          <span className="text-white/60 font-medium text-left">
                             Enterprise Features
                           </span>
                         </div>
@@ -178,26 +179,26 @@ export default function Roadmap() {
             </div>
           </div>
 
-          {/* Sağ çizgi */}
-          <div className="w-px dashed-line text-foreground/10"></div>
+          {/* Sağ çizgi - sadece desktop */}
+          <div className="w-px dashed-line text-foreground/10 md:block hidden"></div>
         </div>
 
         {/* Alt çizgi ve Footer */}
         <div className="flex">
-          {/* Sol çizgi devamı */}
-          <div className="w-px dashed-line text-foreground/10"></div>
+          {/* Sol çizgi devamı - sadece desktop */}
+          <div className="w-px dashed-line text-foreground/10 md:block hidden"></div>
 
           {/* Footer alanı */}
-          <div className="w-[50vw] relative">
-            <div className="h-px dashed-line-horizontal text-foreground/10 w-full"></div>
+          <div className="w-full md:w-[50vw] relative px-4 md:px-0">
+            <div className="h-px dashed-line-horizontal text-foreground/10 w-full md:block hidden"></div>
             <div className="flex justify-center mt-2">
               <Footer />
             </div>
-            <div className="h-px dashed-line-horizontal text-foreground/10 w-full mt-2"></div>
+            <div className="h-px dashed-line-horizontal text-foreground/10 w-full mt-2 md:block hidden"></div>
           </div>
 
-          {/* Sağ çizgi devamı */}
-          <div className="w-px dashed-line text-foreground/10"></div>
+          {/* Sağ çizgi devamı - sadece desktop */}
+          <div className="w-px dashed-line text-foreground/10 md:block hidden"></div>
         </div>
       </div>
     </div>

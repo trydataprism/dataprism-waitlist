@@ -64,7 +64,7 @@ export default function Hero({
       variants={container}
       initial="hidden"
       animate="show"
-      className="text-center max-w-lg mx-auto font-sans"
+      className="text-center max-w-lg mx-auto font-sans px-4 md:px-0"
     >
       <motion.div className="mb-6" variants={item}>
         {/* Waitlist banner */}
@@ -74,10 +74,10 @@ export default function Hero({
           </p>
         </div>
 
-        <h1 className="text-4xl font-bold text-white mb-2">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">
           Dataprism is launching soon.
         </h1>
-        <p className="text-white/80 text-sm pt-0.5">
+        <p className="text-white/80 text-xs sm:text-sm leading-relaxed px-2 whitespace-nowrap">
           Get on the waitlist and be among the first to get access to Dataprism.
         </p>
       </motion.div>
@@ -97,7 +97,7 @@ export default function Hero({
               aria-label="Join Dataprism waitlist"
             >
               <motion.div
-                className="flex gap-3 max-w-sm items-stretch mx-auto"
+                className="flex flex-row gap-3 max-w-sm items-stretch mx-auto"
                 layout
               >
                 <Input

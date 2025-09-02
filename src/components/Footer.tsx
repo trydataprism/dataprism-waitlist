@@ -13,7 +13,7 @@ export default function Footer() {
       transition={{ duration: 0.6, delay: 0.2 }}
       role="contentinfo"
     >
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <Link href="/">
             <Image
@@ -24,12 +24,12 @@ export default function Footer() {
               className="w-4 h-4 cursor-pointer"
             />
           </Link>
-          <p className="text-muted-foreground text-xs">
+          <p className="text-muted-foreground text-xs text-center sm:text-left">
             © 2025 dataprism • All rights reserved
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap justify-center">
           <Link
             href="/roadmap"
             className="text-muted-foreground hover:text-foreground transition-colors text-xs"
@@ -37,7 +37,7 @@ export default function Footer() {
           >
             Roadmap
           </Link>
-          <h1 className="text-muted-foreground transition-colors text-xs">/</h1>
+          <span className="text-muted-foreground transition-colors text-xs">/</span>
           <Link
             href="/who-we-are"
             className="text-muted-foreground hover:text-foreground transition-colors text-xs"

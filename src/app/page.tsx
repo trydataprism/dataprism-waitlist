@@ -83,22 +83,22 @@ export default function Home() {
 
   return (
     <div className="min-h-screen w-full bg-background bg-black flex items-center justify-center">
-      <div className="flex flex-col h-screen pt-6 pb-6">
+      <div className="flex flex-col h-screen pt-6 pb-6 max-w-screen-2xl mx-auto">
         {/* Üst çizgi */}
         <div
-          className="h-px dashed-line-horizontal text-foreground/10"
+          className="h-px dashed-line-horizontal text-foreground/10 md:block hidden"
           style={{ width: "calc(50vw + 2px)" }}
         ></div>
 
         {/* Ana içerik ve çizgiler */}
         <div className="flex-1 flex">
-          {/* Sol çizgi */}
-          <div className="w-px dashed-line text-foreground/10"></div>
+          {/* Sol çizgi - sadece desktop */}
+          <div className="w-px dashed-line text-foreground/10 md:block hidden"></div>
 
           {/* Orta bölüm - Üçgen ve Hero iç içe */}
-          <div className="w-[50vw] flex items-center justify-center relative">
+          <div className="w-full md:w-[50vw] flex items-center justify-center relative px-4 md:px-0">
             {/* Üçgen bölümü - arka planda */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-30">
+            <div className="absolute inset-0 flex items-center justify-center opacity-20 md:opacity-30">
               <Prism
                 animationType="rotate"
                 timeScale={0.3}
@@ -114,7 +114,7 @@ export default function Home() {
             </div>
 
             {/* Hero bileşeni - ön planda */}
-            <div className="relative z-10">
+            <div className="relative z-10 w-full">
               <Hero
                 email={email}
                 setEmail={setEmail}
@@ -129,26 +129,26 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Sağ çizgi */}
-          <div className="w-px dashed-line text-foreground/10"></div>
+          {/* Sağ çizgi - sadece desktop */}
+          <div className="w-px dashed-line text-foreground/10 md:block hidden"></div>
         </div>
 
         {/* Alt çizgi ve Footer - sol ve sağ çizgilerle birlikte */}
         <div className="flex">
-          {/* Sol çizgi devamı */}
-          <div className="w-px dashed-line text-foreground/10"></div>
+          {/* Sol çizgi devamı - sadece desktop */}
+          <div className="w-px dashed-line text-foreground/10 md:block hidden"></div>
 
           {/* Footer alanı */}
-          <div className="w-[50vw] relative">
-            <div className="h-px dashed-line-horizontal text-foreground/10 w-full"></div>
+          <div className="w-full md:w-[50vw] relative px-4 md:px-0">
+            <div className="h-px dashed-line-horizontal text-foreground/10 w-full md:block hidden"></div>
             <div className="flex justify-center mt-2">
               <Footer />
             </div>
-            <div className="h-px dashed-line-horizontal text-foreground/10 w-full mt-2"></div>
+            <div className="h-px dashed-line-horizontal text-foreground/10 w-full mt-2 md:block hidden"></div>
           </div>
 
-          {/* Sağ çizgi devamı */}
-          <div className="w-px dashed-line text-foreground/10"></div>
+          {/* Sağ çizgi devamı - sadece desktop */}
+          <div className="w-px dashed-line text-foreground/10 md:block hidden"></div>
         </div>
       </div>
     </div>
