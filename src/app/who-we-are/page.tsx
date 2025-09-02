@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "@/contexts/ThemeContext";
 import Prism from "@/components/ui/prism";
@@ -106,7 +105,7 @@ export default function WhoWeAre() {
                     </p>
                     <p>
                       Dataprism is built on the belief that powerful data
-                      insights shouldn't require complex tools or extensive
+                      insights shouldn&apos;t require complex tools or extensive
                       technical knowledge.
                     </p>
                     <p>

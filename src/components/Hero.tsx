@@ -29,7 +29,6 @@ export default function Hero({
   isLoading,
   error,
   setError,
-  initialLoad,
 }: HeroProps) {
   const [mounted, setMounted] = useState(false);
 

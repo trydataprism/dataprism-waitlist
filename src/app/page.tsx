@@ -2,10 +2,7 @@
 
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import HowItWorks from "@/components/HowItWorks";
-import Roadmap from "@/components/Roadmap";
 import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
 import { useTheme } from "@/contexts/ThemeContext";
 import Prism from "@/components/ui/prism";
 

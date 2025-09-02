@@ -18,7 +18,7 @@ const Prism = ({
   suspendWhenOffscreen = false,
   timeScale = 0.5,
 }) => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -238,10 +238,10 @@ const Prism = ({
 
     const rotBuf = new Float32Array(9);
     const setMat3FromEuler = (
-      yawY,
-      pitchX,
-      rollZ,
-      out
+      yawY: number,
+      pitchX: number,
+      rollZ: number,
+      out: Float32Array
     ) => {
       const cy = Math.cos(yawY),
         sy = Math.sin(yawY);
@@ -298,10 +298,10 @@ const Prism = ({
       roll = 0;
     let targetYaw = 0,
       targetPitch = 0;
-    const lerp = (a, b, t) => a + (b - a) * t;
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
     const pointer = { x: 0, y: 0, inside: true };
-    const onMove = (e) => {
+    const onMove = (e: MouseEvent) => {
       const ww = Math.max(1, window.innerWidth);
       const wh = Math.max(1, window.innerHeight);
       const cx = ww * 0.5;
@@ -319,10 +319,10 @@ const Prism = ({
       pointer.inside = false;
     };
 
-    let onPointerMove = null;
+    let onPointerMove: ((e: Event) => void) | null = null;
     if (animationType === "hover") {
-      onPointerMove = (e) => {
-        onMove(e);
+      onPointerMove = (e: Event) => {
+        onMove(e as MouseEvent);
         startRAF();
       };
       window.addEventListener("pointermove", onPointerMove, { passive: true });
@@ -335,7 +335,7 @@ const Prism = ({
       program.uniforms.uUseBaseWobble.value = 1;
     }
 
-    const render = (t) => {
+    const render = (t: number) => {
       const time = (t - t0) * 0.001;
       program.uniforms.iTime.value = time;
 
@@ -408,7 +408,8 @@ const Prism = ({
       });
       io.observe(container);
       startRAF();
-      container.__prismIO = io;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (container as any).__prismIO = io;
     } else {
       startRAF();
     }
@@ -426,9 +427,11 @@ const Prism = ({
         window.removeEventListener("blur", onBlur);
       }
       if (suspendWhenOffscreen) {
-        const io = container.__prismIO
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const io = (container as any).__prismIO
         if (io) io.disconnect();
-        delete container.__prismIO;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        delete (container as any).__prismIO;
       }
       if (gl.canvas.parentElement === container)
         container.removeChild(gl.canvas);

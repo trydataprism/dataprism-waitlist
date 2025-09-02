@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "@/contexts/ThemeContext";
 import Prism from "@/components/ui/prism";
@@ -100,9 +99,9 @@ export default function Roadmap() {
                   </h1>
                   <div className="space-y-4 text-white/80 text-sm leading-relaxed">
                     <p>
-                      We're building Dataprism with transparency and your
-                      feedback in mind. Here's what we're working on and what's
-                      coming next.
+                      We&apos;re building Dataprism with transparency and your
+                      feedback in mind. Here&apos;s what we&apos;re working on
+                      and what&apos;s coming next.
                     </p>
                     <div className="flex gap-8 mt-6 justify-center">
                       <div className="space-y-3">
@@ -119,8 +118,8 @@ export default function Roadmap() {
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-teal-400/20 border border-teal-400/40 shadow-sm shadow-teal-400/20"></div>
-                          <span className="text-white font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
+                          <span className="text-white/60 font-medium">
                             Advanced User Segmentation
                           </span>
                         </div>
