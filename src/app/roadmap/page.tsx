@@ -37,10 +37,10 @@ export default function Roadmap() {
             {/* Back button */}
             <Link
               href="/"
-              className="absolute top-6 left-6 z-20 bg-black/50 hover:bg-black/70 text-white px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2"
+              className="absolute top-6 left-6 z-20 bg-black/30 hover:bg-black/50 text-white/70 hover:text-white px-2 py-1.5 rounded-md transition-all duration-200 flex items-center gap-1.5 cursor-pointer text-sm"
             >
               <svg
-                className="w-4 h-4"
+                className="w-3 h-3"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -107,32 +107,32 @@ export default function Roadmap() {
                     <div className="flex gap-8 mt-6 justify-center">
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                          <div className="w-2 h-2 rounded-full bg-teal-400/20 border border-teal-400/40 shadow-sm shadow-teal-400/20"></div>
                           <span className="text-white font-medium">
                             Waitlist & Early Access
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-blue-400"></div>
+                          <div className="w-2 h-2 rounded-full bg-teal-400/20 border border-teal-400/40 shadow-sm shadow-teal-400/20"></div>
                           <span className="text-white font-medium">
                             Real-time Dashboard
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-blue-400"></div>
+                          <div className="w-2 h-2 rounded-full bg-teal-400/20 border border-teal-400/40 shadow-sm shadow-teal-400/20"></div>
                           <span className="text-white font-medium">
                             Advanced User Segmentation
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-                          <span className="text-white font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
+                          <span className="text-white/60 font-medium">
                             Custom Event Tracking
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-                          <span className="text-white font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
+                          <span className="text-white/60 font-medium">
                             AI-Powered Insights
                           </span>
                         </div>
@@ -142,32 +142,32 @@ export default function Roadmap() {
 
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-                          <span className="text-white font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
+                          <span className="text-white/60 font-medium">
                             Team Collaboration
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-                          <span className="text-white font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
+                          <span className="text-white/60 font-medium">
                             API Integration
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-                          <span className="text-white font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
+                          <span className="text-white/60 font-medium">
                             White-label Solutions
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-                          <span className="text-white font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
+                          <span className="text-white/60 font-medium">
                             Mobile App
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-                          <span className="text-white font-medium">
+                          <div className="w-2 h-2 rounded-full bg-white/5 border border-white/20"></div>
+                          <span className="text-white/60 font-medium">
                             Enterprise Features
                           </span>
                         </div>

@@ -9,20 +9,21 @@ export default function Footer() {
     <motion.div
       className="px-4 py-2 w-full"
       initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
       role="contentinfo"
     >
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <Image
-            src="/dark_logo.svg"
-            alt="Dataprism Logo"
-            width={24}
-            height={24}
-            className="w-4 h-4"
-          />
+          <Link href="/">
+            <Image
+              src="/dark_logo.svg"
+              alt="Dataprism Logo"
+              width={24}
+              height={24}
+              className="w-4 h-4 cursor-pointer"
+            />
+          </Link>
           <p className="text-muted-foreground text-xs">
             © 2025 dataprism • All rights reserved
           </p>

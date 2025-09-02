@@ -98,7 +98,7 @@ export default function Hero({
               aria-label="Join Dataprism waitlist"
             >
               <motion.div
-                className="flex gap-3 max-w-md items-stretch mx-auto"
+                className="flex gap-3 max-w-sm items-stretch mx-auto"
                 layout
               >
                 <Input
@@ -125,7 +125,7 @@ export default function Hero({
                 >
                   <Button
                     type="submit"
-                    className="bg-white text-black px-6 cursor-pointer hover:shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:brightness-107 transition-all duration-300"
+                    className="bg-white text-black px-4 cursor-pointer hover:shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:brightness-107 transition-all duration-300"
                     disabled={isLoading}
                   >
                     {isLoading ? "Joining..." : "Join now"}

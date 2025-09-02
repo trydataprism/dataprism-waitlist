@@ -37,10 +37,10 @@ export default function WhoWeAre() {
             {/* Back button */}
             <Link
               href="/"
-              className="absolute top-6 left-6 z-20 bg-black/50 hover:bg-black/70 text-white px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2"
+              className="absolute top-6 left-6 z-20 bg-black/30 hover:bg-black/50 text-white/70 hover:text-white px-2 py-1.5 rounded-md transition-all duration-200 flex items-center gap-1.5 cursor-pointer text-sm"
             >
               <svg
-                className="w-4 h-4"
+                className="w-3 h-3"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
